@@ -23,7 +23,7 @@ public:
 
 /**
 *	@brief	Stack class.
-*	@details	This class processes as First In, First Out (FIFO), ÅÛÇÃ¸´À» Àû¿ëÇØ ´Ù¾çÇÑ º¯¼ö Å¸ÀÔÀ» ÀúÀåÇÒ ¼ö ÀÖ´Ù.
+*	@details	Circular Stack using front and rear to delete the oldest item automatically
 */
 template <typename T>
 class CircularStackType
@@ -61,7 +61,7 @@ public:
 	/**
 	*	@brief	Makes the Stack empty.
 	*	@pre	Stack has been initialized.
-	*	@post	m_iFront¿Í m_iRear is set same value as Constructer.
+	*	@post	m_iFrontì™€ m_iRear is set same value as Constructer.
 	*/
 	void MakeEmpty();
 
