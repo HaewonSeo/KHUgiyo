@@ -1,18 +1,22 @@
 #include <iostream>
 #include <string>
+#include <fstream>
+
+#include "CircularStack.h"
 #include "Sort.h"
 using namespace std;
 
+template <typename T>
 class Client {
 private:
-	Stack<Order> RecentOrder;
+	CircularStackType<T> RecentOrder;
 	int cId;
 
 public:
 	/**
 	*	default constructor
 	*/
-	Client();
+	Client(int id);
 
 	/**
 	*	destructor
@@ -31,7 +35,7 @@ public:
 	*	@pre	The stack should be initialised.
 	*	@post	Information of most recent order is shown.
 	*/
-	void ShowRecent();
+	void ShowAllRecent();
 
 	/**
 	*	@brief	Prints receipt of the last order.
@@ -45,5 +49,48 @@ public:
 	*	@pre	None
 	*	@post	None
 	*/
-	void Exit();
+	int Exit();
 };
+
+template <typename T>
+Client<T>::Client(int id) {
+	cId = id;
+	//look for linked list by id to find existing recent list
+}
+
+template <typename T>
+Client<T>::~Client() {}
+
+template <typename T>
+void Client<T>::OrderNew() {
+	T New;
+	//Set New Order;
+	//if(New is already in Stack)
+		//DeStack;
+		//Push;
+	//else
+		RecentOrder.EnStack(New);
+	//send New to Store;
+}
+
+template <typename T>
+void Client<T>::ShowAllRecent() {
+	RecentOrder.PrintAll();
+}
+
+template <typename T>
+void Client<T>::PrintBill() {
+	ofstream fout;
+	T order;
+	RecentOrder.GetOne(order);
+	fout.open("receipt.txt");
+
+	fout << order;
+
+	fout.close();
+}
+
+template <typename T>
+int Client<T>::Exit() {
+	return 0;
+}

@@ -85,7 +85,7 @@ public:
 	*	@pre	Stack has been initialised.
 	*	@post	None
 	*/
-	void PrintOne();
+	void GetOne(T& item);
 
 private:
 	int m_iFront;	//index of one infront of the first element.
@@ -146,6 +146,6 @@ void CircularStackType<T>::PrintAll() {
 }
 
 template <typename T>
-void CircularStackType<T>::PrintOne() {
-	cout << m_pItems[m_iRear] << endl
+void CircularStackType<T>::GetOne(T& item) {
+	item = m_pItems[m_iRear];
 }
