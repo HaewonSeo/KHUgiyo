@@ -126,13 +126,13 @@ public:
 	int GetTotal();
 
 	/**
-	*	@brief	메뉴 리스트 내의 메뉴 가격의 총합을 반환
+	*	@brief	메뉴 리스트 내의 메뉴를 출력
 	*	@pre	메뉴리스트가 초기화
 	*	@post	none
 	*	@param	none
-	*	@return	메뉴 리스트 내의 메뉴의 총합을 리턴
+	*	@return	메뉴 리스트 내의 메뉴를 출력 
 	*/
-	void PrintMenuList() const;
+	void PrintMenuList();
 
 private:
 	Menu m_Array[MAXSIZE];		///< list array.
