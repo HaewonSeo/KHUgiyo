@@ -8,8 +8,12 @@
 #역할분담
 
 Menu : 유진
+
 Order : 해원
+
 Client : 창목 
+
 Shop : 승호
+
 
 화이팅~!
