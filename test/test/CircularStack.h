@@ -26,7 +26,7 @@ public:
 *	@brief	Stack class.
 *	@details	Circular Stack using front and rear to delete the oldest item automatically
 */
-template <typename T>
+
 class CircularStackType
 {
 public:
@@ -71,7 +71,7 @@ public:
 	*	@pre	Stack has been initialized.
 	*	@post	If (Stack is full), FullStack exception is thrown; otherwise, newItem is at the last.
 	*/
-	void EnStack(T item);
+	void EnStack(Order item);
 
 	/**
 	*	@brief	Print all the items in the Stack on screen
@@ -85,7 +85,7 @@ public:
 	*	@pre	Stack has been initialised.
 	*	@post	None
 	*/
-	void GetOne(T& item);
+	void GetOne(Order& item);
 
 private:
 	int m_iFront;	//index of one infront of the first element.
@@ -94,41 +94,35 @@ private:
 	T* m_pItems;	//pointer for dynamic allocation.
 };
 
-template <typename T>
-CircularStackType<T>::CircularStackType() {
+CircularStackType::CircularStackType() {
 	m_pItems = new T[maxStack];
 	m_iFront = maxStack - 1;
 	m_iRear = maxStack - 1;
 	m_nMaxStack = maxStack;
 }
 
-template <typename T>
-CircularStackType<T>::~CircularStackType() {
+CircularStackType::~CircularStackType() {
 	delete m_pItems;
 }
 
-template <typename T>
-bool CircularStackType<T>::IsFull() {
+bool CircularStackType::IsFull() {
 	if ((m_iRear + 1) % m_nMaxStack == m_iFront)
 		return 1;
 	return 0;
 }
 
-template <typename T>
-bool CircularStackType<T>::IsEmpty() {
+bool CircularStackType::IsEmpty() {
 	if (m_iRear == m_iFront)
 		return 1;
 	return 0;
 }
 
-template <typename T>
-void CircularStackType<T>::MakeEmpty() {
+void CircularStackType::MakeEmpty() {
 	m_iRear = m_nMaxStack;
 	m_iFront = m_nMaxStack;
 }
 
-template <typename T>
-void CircularStackType<T>::EnStack(T item) {
+void CircularStackType::EnStack(Order item) {
 	if (IsFull()) {
 		m_iFront = (m_iFront + 1) % m_nMaxStack;
 	}
@@ -136,8 +130,7 @@ void CircularStackType<T>::EnStack(T item) {
 	m_pItems[m_iRear] = item;
 }
 
-template <typename T>
-void CircularStackType<T>::PrintAll() {
+void CircularStackType::PrintAll() {
 	int index = m_iRear;
 	while (ind > m_iFront) {
 		cout << m_pItems[index] << endl;
@@ -145,7 +138,6 @@ void CircularStackType<T>::PrintAll() {
 	}
 }
 
-template <typename T>
-void CircularStackType<T>::GetOne(T& item) {
+void CircularStackType::GetOne(Order& item) {
 	item = m_pItems[m_iRear];
 }

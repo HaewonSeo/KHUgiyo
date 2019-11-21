@@ -6,10 +6,9 @@
 #include "Sort.h"
 using namespace std;
 
-template <typename T>
 class Client {
 private:
-	CircularStackType<T> RecentOrder;
+	CircularStackType<Order> RecentOrder;
 	int cId;
 
 public:
@@ -52,18 +51,15 @@ public:
 	int Exit();
 };
 
-template <typename T>
 Client<T>::Client(int id) {
 	cId = id;
 	//look for linked list by id to find existing recent list
 }
 
-template <typename T>
 Client<T>::~Client() {}
 
-template <typename T>
-void Client<T>::OrderNew() {
-	T New;
+void Client::OrderNew() {
+	Order New;
 	//Set New Order;
 	//if(New is already in Stack)
 		//DeStack;
@@ -73,15 +69,13 @@ void Client<T>::OrderNew() {
 	//send New to Store;
 }
 
-template <typename T>
-void Client<T>::ShowAllRecent() {
+void Client::ShowAllRecent() {
 	RecentOrder.PrintAll();
 }
 
-template <typename T>
-void Client<T>::PrintBill() {
+void Client::PrintBill() {
 	ofstream fout;
-	T order;
+	Order order;
 	RecentOrder.GetOne(order);
 	fout.open("receipt.txt");
 
@@ -90,7 +84,6 @@ void Client<T>::PrintBill() {
 	fout.close();
 }
 
-template <typename T>
-int Client<T>::Exit() {
+int Client::Exit() {
 	return 0;
 }
