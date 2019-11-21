@@ -23,14 +23,6 @@ public:
 	~Menu();
 
 	/**
-	*	@brief	Get menu code.
-	*	@pre	menu code is set.
-	*	@post	none.
-	*	@return	mCode.
-	*/
-	int GetCode();
-
-	/**
 	*	@brief	Get menu name.
 	*	@pre	menu name is set.
 	*	@post	none.
@@ -60,14 +52,6 @@ public:
 	*	@post	menu record print on the screen.
 	*/
 	void PrintMenu();
-
-	/**
-	*	@brief	Set menu code.
-	*	@pre	none.
-	*	@post	menu code is set.
-	*	@param	inCode	menu code.
-	*/
-	void SetCode(int inCode);
 
 	/**
 	*	@brief	Set menu name.
@@ -102,7 +86,7 @@ public:
 	*	@param	inPrice	menu price.
 	*	@param	inCount	menu count.
 	*/
-	void SetMenu(int inCode, string inName, int inPrice, int inCount);
+	void SetMenu(string inName, int inPrice, int inCount);
 
 	/**
 	*	@brief	Set menu name from keyboard.
@@ -159,7 +143,6 @@ public:
 
 
 private:
-	int mCode;		// 메뉴의 코드.
 	string mName;	// 메뉴의 이름.
 	int mPrice;		// 메뉴의 가격.
 	int mCount;		// 메뉴가 팔린 횟수.

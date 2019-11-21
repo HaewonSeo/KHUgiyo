@@ -42,15 +42,12 @@ int SortedMenuList::Add(Menu inData)
 	int location = 0;
 	moreToSearch = (location < m_Length);
 	while (moreToSearch) {
-		switch (inData.CompareByID(m_Array[location])) {
-		case LESS:
+		if (inData < m_Array[location]){
 			moreToSearch = false;
-			break;
-		case EQUAL:
-		case GREATER:
+		}
+		else{
 			location++;
 			moreToSearch = (location < m_Length);
-			break;
 		}
 	}
 
@@ -89,15 +86,14 @@ int SortedMenuList::Get(Menu& data)
 	ResetList();
 	GetNextItem(tmp);
 	while (m_CurPointer < m_Length) {
-		switch (tmp.CompareByID(data)) {
-		case EQUAL:
+		if (tmp == data) {
 			data = tmp;
 			return 1;
-		case GREATER:
+		}
+		else if(tmp>data)
 			return 0;
-		case LESS:
+		else{
 			GetNextItem(tmp);
-			break;
 		}
 	}
 	return 0;
@@ -140,16 +136,15 @@ int SortedMenuList::GetBinarySearch(Menu& data) {
 	while (moreToSearch && !found) {
 
 		mid = (first + last) / 2;
-		switch (data.CompareByID(m_Array[mid])) {
-		case LESS:
+		if (data < m_Array[mid]) {
 			last = mid - 1;
 			moreToSearch = (first <= last);
-			break;
-		case GREATER:
+		}
+		else if (data > m_Array[mid]) {
 			first = mid + 1;
 			moreToSearch = (first <= last);
-			break;
-		case EQUAL:
+		}
+		else{
 			found = true;
 			data = m_Array[mid];
 			return 1;
@@ -158,6 +153,7 @@ int SortedMenuList::GetBinarySearch(Menu& data) {
 	return 0;
 }
 
+//메뉴 리스트 내의 메뉴 가격의 총합을 반환
 int SortedMenuList::GetTotal() {
 	int total = 0;
 	for (int i = 0; i < MAXSIZE; i++) {
@@ -167,7 +163,8 @@ int SortedMenuList::GetTotal() {
 	return total;
 }
 
-void SortedMenuList::PrintMenuList() const
+//메뉴 리스트 내의 메뉴를 출력
+void SortedMenuList::PrintMenuList()
 {
 	cout << endl;
 	cout << "### [Menu List] ###" << endl;

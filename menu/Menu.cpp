@@ -2,18 +2,12 @@
 
 Menu::Menu()
 {
-	mCode = 0;
 	mName = "";
 	mPrice = 0;
 	mCount = 0;
 }
 
 Menu::~Menu() {}
-
-int Menu::GetCode()
-{
-	return mCode;
-}
 
 string Menu::GetName()
 {
@@ -38,11 +32,6 @@ void Menu::PrintMenu()
 	cin >> mPrice;
 }
 
-void Menu::SetCode(int inCode)
-{
-	mCode = inCode;
-}
-
 void Menu::SetName(string inName)
 {
 	mName = inName;
@@ -58,9 +47,8 @@ void Menu::SetCount(int inCount)
 	mCount = inCount;
 }
 
-void Menu::SetMenu(int inCode, string inName, int inPrice, int inCount)
+void Menu::SetMenu(string inName, int inPrice, int inCount)
 {
-	SetCode(inCode);
 	SetName(inName);
 	SetPrice(inPrice);
 	SetCount(inCount);
@@ -96,7 +84,6 @@ void Menu::InitializeCount()
 
 int Menu::ReadDataFromFile(ifstream& fin)
 {
-	fin >> mCode;
 	fin >> mName;
 	fin >> mPrice;
 	fin >> mCount;
