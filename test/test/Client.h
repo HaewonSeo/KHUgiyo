@@ -4,18 +4,20 @@
 
 #include "CircularStack.h"
 #include "Sort.h"
+#include "Buffer.h"
 using namespace std;
 
 class Client {
 private:
 	CircularStackType<Order> RecentOrder;
 	string cId;
+	Buffer* bufferptr;
 
 public:
 	/**
 	*	default constructor
 	*/
-	Client(int id);
+	Client(int id, Buffer* mainbuffer);
 
 	/**
 	*	destructor
@@ -51,18 +53,21 @@ public:
 	int Exit();
 };
 
-Client<T>::Client(int id) {
+Client::Client(int id, Buffer *mainbuffer) {
 	cId = id;
+	bufferptr = mainbuffer;
 	//look for linked list by id to find existing recent list
 }
 
-Client<T>::~Client() {}
+Client::~Client() {
+	delete bufferptr;
+}
 
 void Client::OrderNew() {
 	Order New(cId);
 	//Set New Order;
 	RecentOrder.EnStack(New);
-	//send New to Store;
+	bufferptr.add(New);
 }
 
 void Client::ShowAllRecent() {

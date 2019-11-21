@@ -100,11 +100,11 @@ private:
 	int m_iBottom;	//index of one infront of the first element.
 	int m_iTop;	//index of the last element.
 	int m_nMaxStack;	//max size of the Stack.
-	T* m_pItems;	//pointer for dynamic allocation.
+	Order* m_pItems;	//pointer for dynamic allocation.
 };
 
 CircularStackType::CircularStackType() {
-	m_pItems = new T[maxStack];
+	m_pItems = new Order[maxStack];
 	m_iBottom = maxStack - 1;
 	m_iTop = maxStack - 1;
 	m_nMaxStack = maxStack;
