@@ -9,7 +9,7 @@ using namespace std;
 class Client {
 private:
 	CircularStackType<Order> RecentOrder;
-	int cId;
+	string cId;
 
 public:
 	/**
@@ -59,13 +59,9 @@ Client<T>::Client(int id) {
 Client<T>::~Client() {}
 
 void Client::OrderNew() {
-	Order New;
+	Order New(cId);
 	//Set New Order;
-	//if(New is already in Stack)
-		//DeStack;
-		//Push;
-	//else
-		RecentOrder.EnStack(New);
+	RecentOrder.EnStack(New);
 	//send New to Store;
 }
 

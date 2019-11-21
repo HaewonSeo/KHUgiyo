@@ -62,7 +62,7 @@ public:
 	/**
 	*	@brief	Makes the Stack empty.
 	*	@pre	Stack has been initialized.
-	*	@post	m_iFront와 m_iRear is set same value as Constructer.
+	*	@post	m_iBottom와 m_iTop is set same value as Constructer.
 	*/
 	void MakeEmpty();
 
@@ -70,8 +70,17 @@ public:
 	*	@brief	Adds newItem to the last of the Stack.
 	*	@pre	Stack has been initialized.
 	*	@post	If (Stack is full), FullStack exception is thrown; otherwise, newItem is at the last.
+	*	@return	1 if successfully added
 	*/
-	void EnStack(Order item);
+	int EnStack(Order item);
+
+	/**
+	*	@brief	Deletes an item in the middle of the stack and rearrange it
+	*	@pre	Stack has been initialised.
+	*	@post	If there was a hit, the searched item gets removed
+	*	@return	1 if there was a hit, 0 if there wasn't
+	*/
+	int DeStack(Order item);
 
 	/**
 	*	@brief	Print all the items in the Stack on screen
@@ -88,16 +97,16 @@ public:
 	void GetOne(Order& item);
 
 private:
-	int m_iFront;	//index of one infront of the first element.
-	int m_iRear;	//index of the last element.
+	int m_iBottom;	//index of one infront of the first element.
+	int m_iTop;	//index of the last element.
 	int m_nMaxStack;	//max size of the Stack.
 	T* m_pItems;	//pointer for dynamic allocation.
 };
 
 CircularStackType::CircularStackType() {
 	m_pItems = new T[maxStack];
-	m_iFront = maxStack - 1;
-	m_iRear = maxStack - 1;
+	m_iBottom = maxStack - 1;
+	m_iTop = maxStack - 1;
 	m_nMaxStack = maxStack;
 }
 
@@ -106,38 +115,62 @@ CircularStackType::~CircularStackType() {
 }
 
 bool CircularStackType::IsFull() {
-	if ((m_iRear + 1) % m_nMaxStack == m_iFront)
+	if ((m_iTop + 1) % m_nMaxStack == m_iBottom)
 		return 1;
 	return 0;
 }
 
 bool CircularStackType::IsEmpty() {
-	if (m_iRear == m_iFront)
+	if (m_iTop == m_iBottom)
 		return 1;
 	return 0;
 }
 
 void CircularStackType::MakeEmpty() {
-	m_iRear = m_nMaxStack;
-	m_iFront = m_nMaxStack;
+	m_iTop = m_nMaxStack;
+	m_iBottom = m_nMaxStack;
 }
 
-void CircularStackType::EnStack(Order item) {
-	if (IsFull()) {
-		m_iFront = (m_iFront + 1) % m_nMaxStack;
+int CircularStackType::EnStack(Order item) {
+	int ind = m_iTop;
+	if (DeStack(item)) { //delete if the same one exists
+		cout << "You are making same order again!" << endl;
 	}
-	m_iRear = (m_iRear + 1) % m_nMaxStack;
-	m_pItems[m_iRear] = item;
+	else {
+		cout << "You are making a new order!" << endl
+	}
+
+	if (IsFull()) {
+		m_iBottom = (m_iBottom + 1) % m_nMaxStack;
+	}
+	m_iTop = (m_iTop + 1) % m_nMaxStack;
+	m_pItems[m_iTop] = item;
+}
+
+int CircularStackType::DeStack(Order item) {
+	int ind = m_iTop;
+	for (int i = (m_iTop - m_iBottom + m_nMaxStack) % m_nMaxStack; i > 0; i--) {
+		if (m_pItems[ind] == item) { // if hit
+			while (ind > m_iBottom) { // tighten up
+				m_pItems[ind] = m_pItems[ind - 1];
+				ind = (ind - 1 + m_nMaxStack) % m_nMaxStack;
+			}
+			m_iBottom = (m_iBottom + 1) % m_nMaxStack;
+			return 1;
+		}
+		ind = (ind - 1 + m_nMaxStack) % m_nMaxStack;
+	}
+	return 0;
 }
 
 void CircularStackType::PrintAll() {
-	int index = m_iRear;
-	while (ind > m_iFront) {
+	int index = m_iTop;
+	for (int i = (m_iTop - m_iBottom + m_nMaxStack) % m_nMaxStack; i > 0; i--) {
 		cout << m_pItems[index] << endl;
 		index = (index - 1 + m_nMaxStack) % m_nMaxStack;
 	}
 }
 
 void CircularStackType::GetOne(Order& item) {
-	item = m_pItems[m_iRear];
+	item = m_pItems[m_iTop];
 }
