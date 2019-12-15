@@ -61,7 +61,6 @@ Client::Client(int id, Buffer *mainbuffer) {
 	cId = id;
 	bufferptr = mainbuffer;
 	m_nCurCommand = 0;
-	//look for linked list by id to find existing recent list
 }
 
 Client::~Client() {
@@ -109,7 +108,7 @@ int Client::GetCommand() {
 
 void Client::OrderNew() {
 	Order New(cId);
-	//Set New Order;
+	bufferptr->add(New);
 	RecentOrder.EnStack(New);
 	bufferptr.add(New);
 }
