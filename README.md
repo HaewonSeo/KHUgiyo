@@ -1,4 +1,4 @@
-# KHUgiyo
+# KHUgiyo(쿠기요 or 거기요)
 
 경희대학교
 자료구조
